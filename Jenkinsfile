@@ -72,7 +72,7 @@ pipeline {
             def swarmInfo = new groovy.json.JsonSlurper().parseText(swarmResponse.getContent())
 
             createStackJson = """
-              {"Name": "devbaier.ch", "RepositoryURL": "https://github.com/$GITHUB_USERNAME/devbaier.ch", "ComposeFilePathInRepository": "docker-compose.yml", "RepositoryAuthentication": true, "RepositoryUsername": "$GITHUB_USERNAME", "RepositoryPassword": "$GITHUB_PASSWORD", "RepositoryReferenceName": "refs/heads/main"}
+              {"Name": "devbaier", "RepositoryURL": "https://github.com/$GITHUB_USERNAME/devbaier.ch", "ComposeFilePathInRepository": "docker-compose.yml", "RepositoryAuthentication": true, "RepositoryUsername": "$GITHUB_USERNAME", "RepositoryPassword": "$GITHUB_PASSWORD", "RepositoryReferenceName": "refs/heads/main"}
             """
 
           }
