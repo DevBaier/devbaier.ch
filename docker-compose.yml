@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   devbaier:
-    image: devbaier:latest
+    image: devbaier.ch:latest
     container_name: devbaier.ch
     restart: always
     labels:
