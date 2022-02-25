@@ -41,7 +41,7 @@ pipeline {
             def stacks = new groovy.json.JsonSlurper().parseText(stackResponse.getContent())
             
             stacks.each { stack ->
-              if(stack.Name == "devbaier.ch") {
+              if(stack.Name == "devbaier") {
                 existingStackId = stack.Id
               }
             }
