@@ -24,7 +24,7 @@ pipeline {
         script {
           // Build the image
               def repoURL = """
-                https://portainer.devbaier.ch/api/endpoints/1/docker/build?t=devbaier:latest&remote=https://raw.githubusercontent.com/DevBaier/devbaier.ch/main/Dockerfile&nocache=true
+                https://portainer.devbaier.ch/api/endpoints/1/docker/build?t=devbaier&remote=https://raw.githubusercontent.com/DevBaier/devbaier.ch/main/Dockerfile&nocache=true
               """
               def imageResponse = httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
         }
