@@ -11,13 +11,13 @@ env:
   IMAGE_NAME: devbaier.ch
 
 jobs:
-  🧪 test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Run tests
+      - name: 🧪 Run tests
         run: |
           if [ -f docker-compose.test.yml ]; then
             docker-compose --file docker-compose.test.yml build
@@ -25,14 +25,14 @@ jobs:
           else
             docker build . --file Dockerfile
           fi
-  📌 push:
+  push:
     needs: test
 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
     steps:
-      - name: Checkout Code
+      - name: 📌 Checkout Code
         uses: actions/checkout@v1
 
       - uses: docker/setup-buildx-action@v1
@@ -51,13 +51,13 @@ jobs:
           tags: |
             ghcr.io/devbaier/devbaier.ch:${{ github.sha }}
             ghcr.io/devbaier/devbaier.ch:latest
-  🌐 Portainer:
+   Portainer:
     needs: push
 
     runs-on: ubuntu-latest
 
     steps:
-      - name: Portainer stack deploy
+      - name: 🌐 Portainer stack deploy
         uses: LGinC/portainer-stack-deploy@0.3.1
         with: 
           serverurl: https://portainer.devbaier.ch
