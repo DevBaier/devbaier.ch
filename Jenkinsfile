@@ -19,7 +19,8 @@ pipeline {
             echo "${env.JWTTOKEN}"
         }
     }
-    stage('Build Docker Image on Portainer') {
+    /* Not working: Replaced with Github workflow */
+    /* stage('Build Docker Image on Portainer') {
       steps {
         script {
           // Build the image
@@ -29,7 +30,7 @@ pipeline {
               def imageResponse = httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
         }
       }
-    }
+    } */
     stage('Delete old Stack') {
       steps {
         script {
