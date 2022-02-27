@@ -52,32 +52,48 @@ jobs:
             ghcr.io/devbaier/devbaier.ch:${{ github.sha }}
             ghcr.io/devbaier/devbaier.ch:latest
   Portainer:
-    needs: push
-
+    name: Deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      GITHUB_REF: ${{ github.ref }}
+      DOCKER_REGISTRY: ghcr.io
+      DOCKER_IMAGE: devbaier/devbaier.ch
 
     steps:
-      - name: 🌐 Portainer stack deploy
-        uses: LGinC/portainer-stack-deploy@0.3.1
-        with: 
-          serverurl: https://portainer.devbaier.ch
+      - uses: actions/checkout@v2
+
+      - name: Creating envs
+        run: |
+          echo "IMAGE_TAG=sha-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+          echo "DOCKER_IMAGE_URI=${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}" >> $GITHUB_ENV
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build docker image and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ env.DOCKER_IMAGE_URI }}:${{ env.IMAGE_TAG }},${{ env.DOCKER_IMAGE_URI }}:latest
+
+      - name: Sleep for 10 seconds
+        run: sleep 10s
+        shell: bash
+
+      - name: Deploy stack to Portainer
+        uses: carlrygart/portainer-stack-deploy@v1
+        with:
+          portainer-host: ${{ secrets.PORTAINER_HOST }}
           username: ${{ secrets.PORTAINER_USERNAME }}
           password: ${{ secrets.PORTAINER_PASSWORD }}
-          endpointId: 1
-          stackname: devbaier.ch
-          imagename: ghrc.io/devbaier/devbaier.ch:latest
-          docker_compose: |
-            version: "2"
-            services:
-              devbaier:
-                image: ghrc.io/devbaier/devbaier.ch:latest
-                container_name: devbaier.ch
-                restart: always
-                labels:
-                  - "traefik.enable=true"
-                  - "traefik.docker.network=traefik_traefik"
-                  - "traefik.http.devbaier.traefik_api.entrypoints=https"
-                  - "traefik.http.devbaier.traefik_api.rule=Host(`devbaier.ch`)"
-                  - "traefik.http.devbaier.traefik_api.service=devbaier"
-                  - "traefik.http.devbaier.traefik_api.tls=true"
-                  - "traefik.http.services.traefik_api.loadbalancer.server.port=3000"
+          stack-name: 'devbaier.ch'
+          stack-definition: 'docker-compose.yml'
+          template-variables: '{"username": "devbaier"}'
+          image: ${{ env.DOCKER_IMAGE_URI }}:${{ env.IMAGE_TAG }}

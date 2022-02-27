@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  devbaier:
+    image: ghcr.io/{{username}}/devbaier.ch:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik_traefik"
+      - "traefik.http.devbaier.traefik_api.entrypoints=https"
+      - "traefik.http.devbaier.traefik_api.rule=Host(`devbaier.ch`)"
+      - "traefik.http.devbaier.traefik_api.service=devbaier"
+      - "traefik.http.devbaier.traefik_api.tls=true"
+      - "traefik.http.services.traefik_api.loadbalancer.server.port=3000"
+    deploy:
+      update_config:
+        order: start-first
