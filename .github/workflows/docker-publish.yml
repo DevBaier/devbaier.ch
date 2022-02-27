@@ -70,6 +70,7 @@ jobs:
             version: "2"
             services:
               devbaier:
+                image: ghrc.io/devbaier/devbaier.ch:latest
                 container_name: devbaier.ch
                 restart: always
                 labels:
