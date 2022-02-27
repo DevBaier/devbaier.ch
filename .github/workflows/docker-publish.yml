@@ -11,7 +11,7 @@ env:
   IMAGE_NAME: devbaier.ch
 
 jobs:
-  test:
+  🧪 test:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
           else
             docker build . --file Dockerfile
           fi
-  push:
+  📌 push:
     needs: test
 
     runs-on: ubuntu-latest
@@ -51,11 +51,11 @@ jobs:
           tags: |
             ghcr.io/devbaier/devbaier.ch:${{ github.sha }}
             ghcr.io/devbaier/devbaier.ch:latest
-  Portainer:
+  🌐 Portainer:
     needs: push
 
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Portainer stack deploy
         uses: LGinC/portainer-stack-deploy@0.3.1
@@ -65,5 +65,4 @@ jobs:
           password: ${{ secrets.PORTAINER_PASSWORD }}
           endpointId: 1
           stackname: devbaier.ch
-          registry: ghrc.io
-          imagename: devbaier/devbaier.ch:latest
+          imagename: ghrc.io/devbaier/devbaier.ch:latest
