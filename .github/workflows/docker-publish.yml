@@ -53,6 +53,9 @@ jobs:
             ghcr.io/devbaier/devbaier.ch:latest
   Portainer:
     needs: push
+
+    runs-on: ubuntu-latest
+    
     steps:
       - name: Portainer stack deploy
         uses: LGinC/portainer-stack-deploy@0.3.1
