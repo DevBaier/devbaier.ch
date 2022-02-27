@@ -51,7 +51,7 @@ jobs:
           tags: |
             ghcr.io/devbaier/devbaier.ch:${{ github.sha }}
             ghcr.io/devbaier/devbaier.ch:latest
-  Portainerize
+  Portaine:
     - name: Portainer stack deploy
       uses: LGinC/portainer-stack-deploy@0.3.1
       with: 
