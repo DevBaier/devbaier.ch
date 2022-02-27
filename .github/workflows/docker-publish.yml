@@ -53,6 +53,7 @@ jobs:
           portainer-host: ${{ secrets.PORTAINER_HOST }}
           username: ${{ secrets.PORTAINER_USERNAME }}
           password: ${{ secrets.PORTAINER_PASSWORD }}
+          endpoint-id: 1
           stack-name: 'devbaier.ch'
           stack-definition: 'docker-compose.yml'
           template-variables: '{"username": "devbaier"}'
