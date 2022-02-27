@@ -19,18 +19,6 @@ pipeline {
             echo "${env.JWTTOKEN}"
         }
     }
-    /* Not working: Replaced with Github workflow */
-    /* stage('Build Docker Image on Portainer') {
-      steps {
-        script {
-          // Build the image
-              def repoURL = """
-                https://portainer.devbaier.ch/api/endpoints/1/docker/build?t=devbaier:latest&remote=https://raw.githubusercontent.com/DevBaier/devbaier.ch/main/Dockerfile&nocache=true
-              """
-              def imageResponse = httpRequest httpMode: 'POST', ignoreSslErrors: true, url: repoURL, validResponseCodes: '200', customHeaders:[[name:"Authorization", value: env.JWTTOKEN ], [name: "cache-control", value: "no-cache"]]
-        }
-      }
-    } */
     stage('Delete old Stack') {
       steps {
         script {
