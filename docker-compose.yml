@@ -11,6 +11,3 @@ services:
       - "traefik.http.devbaier.traefik_api.service=devbaier"
       - "traefik.http.devbaier.traefik_api.tls=true"
       - "traefik.http.services.traefik_api.loadbalancer.server.port=3000"
-    deploy:
-      update_config:
-        order: start-first
