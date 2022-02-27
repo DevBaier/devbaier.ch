@@ -66,4 +66,4 @@ jobs:
           endpointId: 1
           stackname: devbaier.ch
           imagename: ghrc.io/devbaier/devbaier.ch:latest
-          docker_compose:
+          docker_compose: |
