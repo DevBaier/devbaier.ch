@@ -5,7 +5,6 @@ WORKDIR /app
 COPY package.json ./
 RUN yarn install --frozen-lockfile
 
-
 FROM node:16-alpine AS builder
 
 WORKDIR /app
