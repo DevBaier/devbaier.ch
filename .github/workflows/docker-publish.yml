@@ -51,7 +51,7 @@ jobs:
           tags: |
             ghcr.io/devbaier/devbaier.ch:${{ github.sha }}
             ghcr.io/devbaier/devbaier.ch:latest
-   Portainer:
+  Portainer:
     needs: push
 
     runs-on: ubuntu-latest
