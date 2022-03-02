@@ -1,8 +1,17 @@
 version: '3.7'
 
 services:
-  server:
+  devbaier:
     image: ghcr.io/{{username}}/devbaier.ch:latest
+    container_name: devbaier.ch
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.devbaier.entrypoints=https
+      - traefik.http.routers.devbaier.rule=Host(`devbaier.ch`)
+      - traefik http.routers.devbaier.service=devbaier
+      - traefik.http.routers.devbaier.tls=true
+      - traefik.docker.network=traefik_traefik
     deploy:
       update_config:
         order: start-first

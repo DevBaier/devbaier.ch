@@ -16,4 +16,4 @@ RUN yarn build
 EXPOSE 3000
 
 # Running the app
-CMD ["yarn", "dev"]
+CMD ["yarn", "start"]
