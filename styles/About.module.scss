@@ -1,0 +1,11 @@
+.item {
+    border: 1px solid #c1c1c1;
+    border-radius: 5px;
+
+    transform: none;
+
+    &:hover {
+        transform: translateY(-5px) translateX(0);
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 15px -3px, rgba(0, 0, 0, 0.1) 0px 4px 6px -2px;
+    }
+}

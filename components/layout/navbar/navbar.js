@@ -10,7 +10,8 @@ import {
 } from "@chakra-ui/react";
 
 import { 
-    MoonIcon 
+    MoonIcon,
+    SunIcon 
 } from "@chakra-ui/icons";
 
 import { useColorMode,} from '@chakra-ui/react'
@@ -51,17 +52,13 @@ export default function NavBar() {
             <Box>
                 <SimpleGrid h="20" columns={2}>
                     <Flex alignItems="center">
-                        {colorMode === 'light' ? (
-                        <Image width={8} alt="Logo" src="https://res.cloudinary.com/danib/image/upload/v1622916721/Baier/logoNew.svg" />
-                        ) : (
-                            <Image width={8} alt="Logo" src="https://res.cloudinary.com/danib/image/upload/v1622917008/Baier/logoNew_white.svg" />
-                        )}
+                        <Image width={8} alt="Logo" style={{filter: colorMode === 'light' ? 'invert(0)' : 'invert(1)'}} src="https://res.cloudinary.com/danib/image/upload/v1622916721/Baier/logoNew.svg" />
                     </Flex>
                     <Flex alignItems="center" justifyContent="right">
                         {colorMode === 'light' ? (
                             <MoonIcon onClick={toggleColorMode} />
                         ) : (
-                            <MoonIcon onClick={toggleColorMode} />
+                            <SunIcon onClick={toggleColorMode} />
                         )}
                     </Flex>
                 </SimpleGrid>
