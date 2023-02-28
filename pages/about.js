@@ -31,7 +31,7 @@ export default function About() {
                             Streamline AG
                         </Heading>
                         <Text mt={3}>
-                            Full-Stack Web Developer
+                            Software Engineer
                         </Text>
                         <HStack spacing={2} mt={3}>
                             <Tag size={'sm'} variant='solid' colorScheme='twitter'>
@@ -45,6 +45,7 @@ export default function About() {
                     <Flex w={['1oo%', '20%']} mt={[3, 0]} justifyContent={['flex-start', 'flex-end']}>
                         2022 - Present
                     </Flex>
+                    <div class="ribbon ribbon-top-right"><span>Hired</span></div>
                 </Flex>
                 <Flex w={'100%'} p={4} direction={['column', 'row']} className={styles.item}>
                     <Flex w={['1oo%', '10%']}>
@@ -79,7 +80,7 @@ export default function About() {
                     </Flex>
                     <Flex w={['1oo%', '70%']} direction={'column'}>
                         <Heading as="h3">
-                            Digicom Academy AG
+                            Digicomp Academy AG
                         </Heading>
                         <Text mt={3}>
                             Full-Stack Web Developer
