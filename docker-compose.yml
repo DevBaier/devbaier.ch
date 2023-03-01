@@ -10,7 +10,11 @@ services:
       - traefik.http.routers.devbaier.entrypoints=https
       - traefik.http.routers.devbaier.rule=Host(`devbaier.ch`)
       - traefik.http.routers.devbaier.tls=true
-      - traefik.docker.network=traefik_traefik
     deploy:
       update_config:
         order: start-first
+    networks:
+      - traefik    
+networks:
+ traefik:
+  name: traefik_traefik
