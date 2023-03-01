@@ -53,3 +53,4 @@ jobs:
           portainerUrl: ${{ secrets.PORTAINER_HOST }}
           accessToken: ${{ secrets.PORTAINER_TOKEN }}
           stackId: 36
+          endpointId: 3
