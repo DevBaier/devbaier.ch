@@ -48,10 +48,9 @@ jobs:
         shell: bash
 
       - name: Deploy stack to Portainer
-        uses:  luminos-company/portami@v1.1
+        uses:  carlrygart/portainer-stack-deploy@v1
         with:
-          endpoint: ${{ secrets.PORTAINER_HOST }}
-          access_token: ${{ secrets.PORTAINER_TOKEN }}
+          portainer-host: ${{ secrets.PORTAINER_HOST }}
+          username: ${{ secrets.PORTAINER_USER }}
+          password: ${{ secrets.PORTAINER_PASS }}
           stack_id: 'devbaierch'
-          prune: true
-          pull: true
