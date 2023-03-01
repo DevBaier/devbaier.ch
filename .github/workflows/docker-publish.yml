@@ -54,3 +54,4 @@ jobs:
           username: ${{ secrets.PORTAINER_USER }}
           password: ${{ secrets.PORTAINER_PASS }}
           stack-name: 'devbaierch'
+          stack-definition: 'docker-compose.yml'
