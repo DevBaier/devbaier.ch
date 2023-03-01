@@ -48,9 +48,9 @@ jobs:
         shell: bash
 
       - name: Deploy stack to Portainer
-        uses:  wirgen/portainer-stack-redeploy-action@v1.1
+        uses:  luminos-company/portami@v1.1
         with:
-          portainerUrl: ${{ secrets.PORTAINER_HOST }}
+          endpoint: ${{ secrets.PORTAINER_HOST }}
           accessToken: ${{ secrets.PORTAINER_TOKEN }}
           stackId: 'devbaierch'
-          endpointId: 3
+          pull: true
