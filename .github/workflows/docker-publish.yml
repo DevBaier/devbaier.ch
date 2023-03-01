@@ -53,4 +53,5 @@ jobs:
           endpoint: ${{ secrets.PORTAINER_HOST }}
           access_token: ${{ secrets.PORTAINER_TOKEN }}
           stack_id: 'devbaierch'
+          prune: true
           pull: true
