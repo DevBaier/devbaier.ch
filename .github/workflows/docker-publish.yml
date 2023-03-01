@@ -52,5 +52,5 @@ jobs:
         with:
           portainerUrl: ${{ secrets.PORTAINER_HOST }}
           accessToken: ${{ secrets.PORTAINER_TOKEN }}
-          stackId: 36
+          stackId: 'devbaierch'
           endpointId: 3
