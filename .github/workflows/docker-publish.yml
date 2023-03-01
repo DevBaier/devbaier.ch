@@ -51,6 +51,6 @@ jobs:
         uses:  luminos-company/portami@v1.1
         with:
           endpoint: ${{ secrets.PORTAINER_HOST }}
-          accessToken: ${{ secrets.PORTAINER_TOKEN }}
-          stackId: 'devbaierch'
+          access_token: ${{ secrets.PORTAINER_TOKEN }}
+          stack_id: 'devbaierch'
           pull: true
