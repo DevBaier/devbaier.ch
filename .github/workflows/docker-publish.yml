@@ -53,4 +53,4 @@ jobs:
           portainer-host: ${{ secrets.PORTAINER_HOST }}
           username: ${{ secrets.PORTAINER_USER }}
           password: ${{ secrets.PORTAINER_PASS }}
-          stack_id: 'devbaierch'
+          stack-name: 'devbaierch'
