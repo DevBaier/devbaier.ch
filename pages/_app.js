@@ -4,8 +4,6 @@ import { useRouter } from 'next/router'
 import { ChakraProvider } from '@chakra-ui/react'
 import Layout from '../components/layout/layout'
 
-import * as ga from '../lib/ga'
-
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {

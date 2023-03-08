@@ -5,8 +5,7 @@
     "dev": "next dev -p 3005",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "deploy": "docker build -t docker.devbaier.ch/devbaier . && docker push docker.devbaier.ch/devbaier"
+    "lint": "next lint"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",
