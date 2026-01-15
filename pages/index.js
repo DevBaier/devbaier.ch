@@ -1,23 +1,20 @@
+import { useState } from 'react'
 import Head from 'next/head'
-import { 
-  Container,
-  Image,
-  Heading
-} from '@chakra-ui/react'
-import styles from '../styles/Home.module.scss'
+import FullScreenTerminal from '../components/Terminal/FullScreenTerminal'
+import LoadingSequence from '../components/Terminal/LoadingSequence'
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true)
+
   return (
-    <Container maxW='container.xl'>
+    <>
       <Head>
-        <title>Daniel Baier | Full-stack Web Developer & Consulting</title>
+        <title>Daniel Baier | Full-stack Web Developer</title>
+        <meta name="description" content="Interactive terminal portfolio of Daniel Baier - Full-stack Web Developer & Consultant" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <section id="avatar" className={styles.container}>
-        <Image src='https://res.cloudinary.com/danib/image/upload/v1604996111/Baier/avatar-summer.svg' alt='Avatar' />
-      </section>
-      <section id="about" className={styles.about}>
-        <Heading>Hi 🖖🏻, I&apos;m Daniel Baier</Heading>
-      </section>
-    </Container>
+      {isLoading && <LoadingSequence onComplete={() => setIsLoading(false)} />}
+      {!isLoading && <FullScreenTerminal />}
+    </>
   )
 }

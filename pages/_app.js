@@ -24,11 +24,17 @@ function MyApp({ Component, pageProps }) {
     }
   }, [router.events])
 
+  const isTerminalPage = router.pathname === '/'
+
   return (
     <ChakraProvider>
-      <Layout>
+      {isTerminalPage ? (
         <Component {...pageProps} />
-      </Layout>
+      ) : (
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      )}
     </ChakraProvider>
   )
 }

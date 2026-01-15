@@ -1,0 +1,404 @@
+.fullscreenTerminal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  font-family: 'Courier New', 'Courier', monospace;
+  cursor: text;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.terminalBody {
+  width: 100%;
+  height: 100%;
+  padding: 2rem 3rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Custom scrollbar */
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 65, 0.4);
+    border-radius: 5px;
+
+    &:hover {
+      background: rgba(0, 255, 65, 0.6);
+    }
+  }
+}
+
+.prompt {
+  color: #00ff41;
+  font-weight: 700;
+  margin-right: 0.5rem;
+  text-shadow:
+    0 0 5px rgba(0, 255, 65, 0.5),
+    0 0 10px rgba(0, 255, 65, 0.3);
+  user-select: none;
+  font-size: 1rem;
+}
+
+.inputLine {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.input {
+  color: #fff !important;
+  font-family: 'Courier New', 'Courier', monospace !important;
+  font-size: 1rem !important;
+  caret-color: #00ff41;
+  padding: 0 !important;
+  height: auto !important;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.3);
+
+  &:focus {
+    box-shadow: none !important;
+  }
+
+  /* Blinking cursor effect */
+  &::after {
+    content: '▊';
+    color: #00ff41;
+    animation: blink 1s infinite;
+    margin-left: 2px;
+  }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.output {
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.3s ease-out;
+
+  &.matrix {
+    .outputLine {
+      color: #00ff41;
+      animation: matrixGlow 1s ease-in-out;
+      text-shadow:
+        0 0 5px rgba(0, 255, 65, 0.8),
+        0 0 10px rgba(0, 255, 65, 0.5),
+        0 0 15px rgba(0, 255, 65, 0.3);
+    }
+  }
+
+  &.hack {
+    .outputLine {
+      color: #ff0055;
+      animation: hackFlicker 0.5s ease-in-out;
+      text-shadow:
+        0 0 5px rgba(255, 0, 85, 0.8),
+        0 0 10px rgba(255, 0, 85, 0.5);
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes matrixGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 5px rgba(0, 255, 65, 0.8),
+      0 0 10px rgba(0, 255, 65, 0.5);
+  }
+  50% {
+    text-shadow:
+      0 0 10px rgba(0, 255, 65, 1),
+      0 0 20px rgba(0, 255, 65, 0.8),
+      0 0 30px rgba(0, 255, 65, 0.5);
+  }
+}
+
+@keyframes hackFlicker {
+  0%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 5px rgba(255, 0, 85, 0.8),
+      0 0 10px rgba(255, 0, 85, 0.5);
+  }
+  20%, 40%, 60%, 80% {
+    opacity: 0.7;
+    text-shadow:
+      0 0 3px rgba(255, 0, 85, 0.6),
+      0 0 8px rgba(255, 0, 85, 0.4);
+  }
+}
+
+.outputLine {
+  color: #b8b8b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'Courier New', 'Courier', monospace;
+  text-shadow: 0 0 1px rgba(184, 184, 184, 0.5);
+
+  &:empty::before {
+    content: '\00a0';
+  }
+}
+
+.error {
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.errorLine {
+  color: #ff4444;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  text-shadow:
+    0 0 5px rgba(255, 68, 68, 0.6),
+    0 0 10px rgba(255, 68, 68, 0.3);
+  font-family: 'Courier New', 'Courier', monospace;
+}
+
+/* Selection color */
+.fullscreenTerminal ::selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: #fff;
+}
+
+/* Scanline effect */
+.fullscreenTerminal::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0) 50%,
+    rgba(0, 255, 65, 0.02) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+  animation: scanline 10s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+/* Screen flicker effect */
+.fullscreenTerminal::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 255, 65, 0.02);
+  pointer-events: none;
+  z-index: 2;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.27861;
+  }
+  5% {
+    opacity: 0.34769;
+  }
+  10% {
+    opacity: 0.23604;
+  }
+  15% {
+    opacity: 0.90626;
+  }
+  20% {
+    opacity: 0.18128;
+  }
+  25% {
+    opacity: 0.83891;
+  }
+  30% {
+    opacity: 0.65583;
+  }
+  35% {
+    opacity: 0.67807;
+  }
+  40% {
+    opacity: 0.26559;
+  }
+  45% {
+    opacity: 0.84693;
+  }
+  50% {
+    opacity: 0.96019;
+  }
+  55% {
+    opacity: 0.08594;
+  }
+  60% {
+    opacity: 0.20313;
+  }
+  65% {
+    opacity: 0.71988;
+  }
+  70% {
+    opacity: 0.53455;
+  }
+  75% {
+    opacity: 0.37288;
+  }
+  80% {
+    opacity: 0.71428;
+  }
+  85% {
+    opacity: 0.70419;
+  }
+  90% {
+    opacity: 0.7003;
+  }
+  95% {
+    opacity: 0.36108;
+  }
+  100% {
+    opacity: 0.24387;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .fullscreenTerminal {
+    font-size: 0.9rem;
+  }
+
+  .terminalBody {
+    padding: 1rem 1.5rem;
+  }
+
+  .prompt,
+  .input {
+    font-size: 0.9rem !important;
+  }
+
+  .outputLine,
+  .errorLine,
+  .inputLine {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .fullscreenTerminal {
+    font-size: 0.85rem;
+  }
+
+  .terminalBody {
+    padding: 0.75rem 1rem;
+  }
+
+  .prompt,
+  .input {
+    font-size: 0.85rem !important;
+  }
+
+  .outputLine,
+  .errorLine,
+  .inputLine {
+    font-size: 0.8rem;
+  }
+}
+
+/* Glow effect on hover (for desktop) */
+@media (min-width: 769px) {
+  .fullscreenTerminal:hover::before {
+    animation: scanline 5s linear infinite;
+  }
+}
+
+/* Print-friendly styles */
+@media print {
+  .fullscreenTerminal::before,
+  .fullscreenTerminal::after {
+    display: none;
+  }
+}
+
+/* Hacker Mode Styles */
+.hackerMode {
+  .prompt {
+    color: #ff0040 !important;
+    text-shadow:
+      0 0 5px rgba(255, 0, 64, 0.5),
+      0 0 10px rgba(255, 0, 64, 0.3) !important;
+  }
+
+  .outputLine {
+    color: #ff4466 !important;
+  }
+
+  .inputLine {
+    color: #ff3355 !important;
+  }
+
+  .input {
+    color: #ff0040 !important;
+    caret-color: #ff0040 !important;
+  }
+
+  &::before {
+    background: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(255, 0, 64, 0.03) 50%,
+      transparent 100%
+    ) !important;
+  }
+
+  .terminalBody::-webkit-scrollbar-thumb {
+    background: rgba(255, 0, 64, 0.4) !important;
+
+    &:hover {
+      background: rgba(255, 0, 64, 0.6) !important;
+    }
+  }
+
+  .matrix,
+  .hack {
+    color: #ff0040 !important;
+    text-shadow: 0 0 5px rgba(255, 0, 64, 0.7) !important;
+  }
+}

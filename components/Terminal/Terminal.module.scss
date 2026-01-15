@@ -1,0 +1,270 @@
+.terminal {
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  box-shadow:
+    0 0 20px rgba(0, 255, 65, 0.3),
+    0 20px 60px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+  margin: 2rem auto;
+  font-family: 'Courier New', 'Courier', monospace;
+  border: 1px solid rgba(0, 255, 65, 0.2);
+  cursor: text;
+
+  &:hover {
+    box-shadow:
+      0 0 30px rgba(0, 255, 65, 0.4),
+      0 20px 60px rgba(0, 0, 0, 0.9);
+  }
+}
+
+.terminalHeader {
+  background: linear-gradient(180deg, #2d2d2d 0%, #1a1a1a 100%);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+  position: relative;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-right: 1rem;
+
+  span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: block;
+  }
+}
+
+.close {
+  background: #ff5f56;
+  box-shadow: 0 0 5px rgba(255, 95, 86, 0.5);
+}
+
+.minimize {
+  background: #ffbd2e;
+  box-shadow: 0 0 5px rgba(255, 189, 46, 0.5);
+}
+
+.maximize {
+  background: #27c93f;
+  box-shadow: 0 0 5px rgba(39, 201, 63, 0.5);
+}
+
+.title {
+  color: rgba(0, 255, 65, 0.8);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.terminalBody {
+  padding: 1.5rem;
+  min-height: 500px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #000;
+
+  /* Custom scrollbar */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 65, 0.3);
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(0, 255, 65, 0.5);
+    }
+  }
+}
+
+.prompt {
+  color: #00ff41;
+  font-weight: 700;
+  margin-right: 0.5rem;
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+  user-select: none;
+}
+
+.inputLine {
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.input {
+  color: #fff !important;
+  font-family: 'Courier New', 'Courier', monospace !important;
+  font-size: 0.95rem !important;
+  caret-color: #00ff41;
+  padding: 0 !important;
+  height: auto !important;
+
+  &:focus {
+    box-shadow: none !important;
+  }
+
+  /* Blinking cursor effect */
+  &:focus::after {
+    content: '';
+    animation: blink 1s infinite;
+  }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.output {
+  margin-bottom: 1rem;
+
+  &.matrix {
+    .outputLine {
+      color: #00ff41;
+      animation: matrixGlow 0.5s ease-in-out;
+    }
+  }
+
+  &.hack {
+    .outputLine {
+      color: #ff0055;
+      animation: hackFlicker 0.3s ease-in-out;
+    }
+  }
+}
+
+@keyframes matrixGlow {
+  0%, 100% {
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.8);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(0, 255, 65, 1);
+  }
+}
+
+@keyframes hackFlicker {
+  0%, 100% { opacity: 1; }
+  20%, 40%, 60%, 80% { opacity: 0.7; }
+}
+
+.outputLine {
+  color: #b8b8b8;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+
+  &:empty::before {
+    content: '\00a0';
+  }
+}
+
+.error {
+  margin-bottom: 1rem;
+}
+
+.errorLine {
+  color: #ff4444;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-shadow: 0 0 5px rgba(255, 68, 68, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .terminal {
+    margin: 1rem;
+    max-width: 100%;
+  }
+
+  .terminalBody {
+    min-height: 400px;
+    max-height: 60vh;
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 0.75rem;
+  }
+
+  .outputLine,
+  .errorLine,
+  .inputLine {
+    font-size: 0.85rem;
+  }
+}
+
+/* Matrix rain effect (optional background) */
+@keyframes matrixRain {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Glitch effect for special moments */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Typing indicator animation */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Selection color */
+.terminal ::selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: #fff;
+}
