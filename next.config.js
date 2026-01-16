@@ -1,6 +1,8 @@
 module.exports = {
+  output: 'export',
   reactStrictMode: true,
   poweredByHeader: false,
+  trailingSlash: true,
   images: {
     remotePatterns: [
       {
